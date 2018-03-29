@@ -42,6 +42,7 @@ $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
  * Resuelve las rutas 
  */
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
+
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
         $response->setContent('404 - Page not found');
@@ -52,9 +53,12 @@ switch ($routeInfo[0]) {
         $response->setStatusCode(405);
         break;
     case \FastRoute\Dispatcher::FOUND:
-        $handler = $routeInfo[1];
+        $className = $routeInfo[1][0];
+        $method = $routeInfo[1][1];
         $vars = $routeInfo[2];
-        call_user_func($handler, $vars);
+
+        $class = new $className;
+        $class->$method($vars);
         break;
 }
 
