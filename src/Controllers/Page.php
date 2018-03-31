@@ -3,23 +3,23 @@
 namespace Example\Controllers;
 
 use Http\Response;
-use Example\Template\Renderer;
+use Example\Template\FrontendRenderer;
 use Example\Page\PageReader;
 use Example\Page\InvalidPageException;
 
 class Page
 {
     private $response;
-    private $renderer;
+    private $frontendRenderer;
     private $pageReader;
 
     public function __construct(
         Response $response,
-        Renderer $renderer,
+        FrontendRenderer $frontendRenderer,
         PageReader $pagereader
     ) {
         $this->response = $response;
-        $this->renderer = $renderer;
+        $this->frontendRenderer = $frontendRenderer;
         $this->pagereader = $pagereader;
     }
 
@@ -33,7 +33,7 @@ class Page
             $this->response->setStatusCode(404);
             return $this->response->setContent('404 - Page not found');
         }
-        $html = $this->renderer->render('Page', $data);
+        $html = $this->frontendRenderer->render('Page', $data);
         $this->response->setContent($html);
     }
 }

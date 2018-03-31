@@ -4,22 +4,22 @@ namespace Example\Controllers;
 
 use Http\Request;
 use Http\Response;
-use Example\Template\Renderer;
+use Example\Template\FrontendRenderer;
 
 class Homepage
 {
     private $request;
     private $response;
-    private $renderer;
+    private $frontendRenderer;
 
     public function __construct(
         Request $request, 
         Response $response,
-        Renderer $renderer
+        FrontendRenderer $frontendRenderer
     ) {
         $this->request = $request;
         $this->response = $response;
-        $this->renderer = $renderer;
+        $this->frontendRenderer = $frontendRenderer;
     }
 
     public function show()
@@ -27,7 +27,7 @@ class Homepage
         $data = [
             'name' => $this->request->getParameter('name', 'stranger'),
         ];
-        $html = $this->renderer->render('Homepage', $data);
+        $html = $this->frontendRenderer->render('Homepage', $data);
         $this->response->setContent($html);
     }
 }
