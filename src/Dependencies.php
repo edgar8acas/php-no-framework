@@ -39,4 +39,9 @@ $injector->alias('Example\Template\FrontendRenderer', 'Example\Template\Frontend
 
 $injector->alias('Example\Menu\MenuReader', 'Example\Menu\ArrayMenuReader');
 $injector->share('Example\Menu\ArrayMenuReader');
+
+
+$injector->alias('Example\Controllers\Crud', 'Example\Controllers\ControllerUsuario');
+
 return $injector;
+

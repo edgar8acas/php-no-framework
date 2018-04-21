@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/Config.php';
 
 error_reporting(E_ALL);
 
@@ -24,6 +25,7 @@ $injector = include('Dependencies.php');
 
 $request = $injector->make('Http\HttpRequest');
 $response = $injector->make('Http\HttpResponse');
+
 
 #$content = '404 - Page not found';
 #$response->setContent($content);
